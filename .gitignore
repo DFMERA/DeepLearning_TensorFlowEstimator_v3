@@ -333,6 +333,8 @@ ASALocalRun/
 
 # MSBuild Binary and Structured Log
 *.binlog
+# Ignore external test datasets.
+/test/data/external/
 
 # NVidia Nsight GPU debugger configuration file
 *.nvuser
@@ -351,3 +353,6 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+
+# macOS
+.DS_Store
