@@ -1,0 +1,39 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+
+<div class="text-center">
+    <form enctype="multipart/form-data" method="post">
+        <h1 class="display-4">Image Predictor</h1>
+        <input type="file" asp-for="ImageFile"/>
+        <input type="submit" value="Predecir"/>
+        <p>Awesome Prediction: @Html.DisplayFor(model => model.Predict.PredictedLabelValue)</p>
+        <table class="table">
+        <thead>
+            <tr>
+                <td>
+                    Score
+                </td>
+                </tr>
+        </thead>
+            <tbody>
+                @if (Model.Predict != null)
+                {
+                    @foreach (float item in Model.Predict.Score)
+                    {
+                    <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item)
+                    </td>
+                    </tr>
+                    }
+                }
+        </tbody>
+        </table>
+        <!--<input id="lblMessage" asp-for="Message" readonly="readonly"/>-->
+    </form>
+    
+</div>
