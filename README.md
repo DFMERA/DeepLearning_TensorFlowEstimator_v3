@@ -74,7 +74,7 @@ The name of each sub-folder is important because it will be used as the label fo
 ## ML Task - [Image Classification](https://en.wikipedia.org/wiki/Outline_of_object_recognition)
 To solve this problem, first we will build an ML model. Then we will train the model on existing data, evaluate how good it is, and lastly we'll consume the model to classify a new image.
 
-![Build -> Train -> Evaluate -> Consume](../shared_content/modelpipeline.png)
+![Build -> Train -> Evaluate -> Consume](https://github.com/dotnet/machinelearning-samples/blob/master/samples/csharp/getting-started/shared_content/modelpipeline.png)
 
 ### 0. Image set download and preparation
 
