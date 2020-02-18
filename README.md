@@ -1,3 +1,44 @@
+# Modificaciones para Visual Studio for Mac
+
+Este proyecto ha sido modificado para que se pueda correr en Mac OS con las versiones actualizadas de .NetCore y ML.NET
+
+## Actualización a .NetCore 3.0 y ML.NET 1.4
+
+Luego de actualizar las versiones de .NetCore y ML.NET el proyecto ImageClassification.Train deja de funcionar porque presenta uno de los siguientes error (dependiendo de la version de Mac OS):
+```
+The type initializer for ‘System.Drawing.GDIPlus’ threw an exception. — -> System.DllNotFoundException: Unable to load DLL ‘gdiplus’: The specified module or one of its dependencies could not be found.
+```
+```System.TypeInitializationException : The type initializer for 'Gdip' threw an exception.
+---- System.DllNotFoundException : Unable to load DLL 'libgdiplus': The specified module could not be found.
+```
+
+Para que el Mac OS reconozca la libreria faltante primero se debe instalar el gestor de paquetes Homebrew con el siguiente commando:
+```
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+```
+
+Una vez instalado el gestor de paquetes instalamos la libreria faltante con el siguiente commando.
+```
+brew install mono-libgdiplus
+```
+
+## Ejecución del proyecto ImageClassification.Predict
+
+Luego de actualizar .NetCore y ML.NET podemos ejecutar el proyecto ImageClassification.Train para crear el modelo. Para realizar las predicciones se debe ejecutar el proyecto ImageClassification.Predict pero al momento de cargar una imagen arroja la siguiente excepción.
+
+"DllNotFoundException: Unable to load DLL 'tensorflow': The specified module could not be found"
+
+Esto se debe a un bug en las referencias que guarda ML.NET luego de actualizar la versión a la 1.4.0
+
+Para solventar este error de referencias debemos agregar el siguiente paquete Nuget al proyecto ImageClassification.Predict
+```
+dotnet add package SciSharp.TensorFlow.Redist
+```
+
+El códgio del proyecto no es necesario modificarlo para ejecutarlo en Mac OS y se mantiene igual que el original
+
+-----------------------------------------------------------------------------------------------
+
 # Image Classification Training (Model composition using TensorFlow Featurizer Estimator)
 
 | ML.NET version | API type          | Status                        | App Type    | Data type | Scenario            | ML Task                   | Algorithms                  |
